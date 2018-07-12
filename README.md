@@ -61,9 +61,8 @@ JS코드도 `index.html.erb`에 최하단에 있는 코드들을 `app/assets/jav
 //<script type="text/javascript" src="javascript/ 을
 //= require        로 바꾸기
 
-//cf) 만약
+//cf) 만약 CND이 있다면
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=KEY&region=GB"/>
-//이 있다면
 // app/views/layouts/application.html.erb의 <body> 밑으로 옮기기
 ```
 
@@ -86,4 +85,22 @@ Image는 `app/assets/images`로 옮기기
 
 
 
-cf) Atom에서 `ctrl+shift+f`로 전체 파일에서 검색이 가능하다. 
+cf) Atom에서 `ctrl+shift+f`로 전체 파일에서 검색이 가능하다.
+
+cf) erb코드에서 javascript부분 중 나중에 실행시켜야 하는 경우
+
+```javascript
+// ex. app/views/controller/index.html.erb
+//단순 코드가 아니라 js 코드가 써져 있는 경우//
+<% content_for 'javascripts_contents' do %>
+	<script type = "text/javascript">
+        ...
+    	...
+    </script>
+<% end %>
+```
+
+```erb
+<!-- app/views/layouts/application.html.erb -->
+<%= yield 'javascript_contents' %>
+```
